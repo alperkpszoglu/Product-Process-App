@@ -1,7 +1,7 @@
 # > A Vue.js project
 
 # Getting Started
-Clone the Repo: git clone https://github.com/ooade/vuex-examples.git
+Clone the Repo: git clone https://github.com/alperkpszoglu/Product-Process-App.git
 
 
 ## Build Setup
