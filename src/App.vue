@@ -1,5 +1,7 @@
 <template>
-  <landing-page></landing-page>
+  <div>
+    <landing-page></landing-page>
+  </div>
 </template>
 
 <script>

@@ -4,15 +4,15 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Ürün Listesi</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Ürün İşlemleri</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Ürün Çıkışı</a>
-            </li>
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">Ürün Listesi</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/product-purchase" class="nav-link">Ürün İşlemleri</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/product-exit" class="nav-link"> Ürün Çıkış </router-link>
+          </li>
         </ul>
       </div>
     </div>
