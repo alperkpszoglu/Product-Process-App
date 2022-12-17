@@ -14,16 +14,16 @@
               <th>Açıklama</th>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="product in getProductList" :key="product.Name">
                 <td class="align-middle text-center"><span class="badge badge-info"> E564fghdE563df </span></td>
-                <td class="align-middle text-center">Deneme</td>
-                <td class="align-middle text-center">1</td>
-                <td style="width: 120px;">10,000</td>
-                <td class="align-middle">Örnek Açıklama</td>
+                <td class="align-middle text-center">{{product.Name}}</td>
+                <td class="align-middle text-center">{{product.Amount}}</td>
+                <td style="width: 120px;">{{product.Price}}</td>
+                <td class="align-middle">{{product.Description}}</td>
               </tr>
             </tbody>
           </table>
-          <div class="alert alert-warning">
+          <div class="alert alert-warning" v-if="getProductList.length == 0">
             <strong>Henüz Burada Bir Kayıt Bulamadık</strong>
             <br />
             <small>Kayıt Eklemek için Ürün İşlemleri menüsünden yararlanabilirsiniz </small>
@@ -35,7 +35,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    getProductList(){
+      return this.$store.getters.productList;
+    }
+  }
+};
 </script>
 
 <style></style>
