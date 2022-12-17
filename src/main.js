@@ -9,7 +9,7 @@ import { store } from './store/index';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-Vue.http.options.root = 'https://product-management-app-25360-default-rtdb.firebaseio.com/'; 
+// Vue.http.options.root = 'https://product-management-app-25360-default-rtdb.firebaseio.com/'; 
 
 const router = new VueRouter({
   routes,

@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     saveProduct() {
-      this.$store.dispatch('getProductList',this.product);
+      this.$store.dispatch('saveProduct',this.product);
     },
   },
 };

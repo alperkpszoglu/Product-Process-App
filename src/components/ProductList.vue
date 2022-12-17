@@ -15,11 +15,11 @@
             </thead>
             <tbody>
               <tr v-for="product in getProductList" :key="product.Name">
-                <td class="align-middle text-center"><span class="badge badge-info"> E564fghdE563df </span></td>
-                <td class="align-middle text-center">{{product.Name}}</td>
-                <td class="align-middle text-center">{{product.Amount}}</td>
-                <td style="width: 120px;">{{product.Price}}</td>
-                <td class="align-middle">{{product.Description}}</td>
+                <td class="align-middle text-center"><span class="badge badge-info"> {{product.Id}} </span></td>
+                <td class="align-middle text-center">{{ product.Name }}</td>
+                <td class="align-middle text-center">{{ product.Amount }}</td>
+                <td style="width: 120px;">{{ product.Price }}</td>
+                <td class="align-middle">{{ product.Description }}</td>
               </tr>
             </tbody>
           </table>
@@ -37,10 +37,13 @@
 <script>
 export default {
   computed: {
-    getProductList(){
+    getProductList() {
       return this.$store.getters.productList;
-    }
-  }
+    },
+  },
+  created() {
+    this.$store.dispatch('fetchDataFromFirebase');
+  },
 };
 </script>
 
