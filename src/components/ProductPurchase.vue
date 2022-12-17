@@ -7,22 +7,22 @@
           <hr />
           <div class="form-group">
             <label>Ürün Adı</label>
-            <input type="text" v-model="product.name" class="form-control" placeholder="Ürün adını giriniz.." />
+            <input type="text" v-model="product.Name" class="form-control" placeholder="Ürün adını giriniz.." />
           </div>
           <div class="form-group">
             <label>Adet</label>
-            <input type="text" v-model="product.amount" class="form-control" placeholder="Ürün adetini giriniz.." />
+            <input type="text" v-model="product.Amount" class="form-control" placeholder="Ürün adetini giriniz.." />
           </div>
           <div class="form-group">
             <label>Fiyat</label>
-            <input type="text" v-model="product.price" class="form-control" placeholder="Ürün fiyatı giriniz.." />
+            <input type="text" v-model="product.Price" class="form-control" placeholder="Ürün fiyatı giriniz.." />
           </div>
           <div class="form-group">
             <label>Açıklama</label>
             <textarea
               cols="30"
               rows="5"
-              v-model="product.description"
+              v-model="product.Description"
               placeholder="Ürüne ait bir açıklama giriniz..."
               class="form-control"
             ></textarea>
@@ -40,10 +40,10 @@ export default {
   data() {
     return {
       product: {
-        name: '',
-        amount: 0,
-        price: 0,
-        description: '',
+        Name: '',
+        Amount: 0,
+        Price: 0,
+        Description: '',
       },
     };
   },

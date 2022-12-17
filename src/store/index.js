@@ -14,13 +14,12 @@ export const store = new Vuex.Store({
   },
   mutations: {
     getProductList(state, val) {
-      console.log(val);
       state.products.push(val);
     },
   },
   actions: {
-    getProductList({ commit }, val) {
-      commit('getProductList', val);
+    getProductList({ commit }, payload) {
+      commit('getProductList', payload);
     },
   },
 });
