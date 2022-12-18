@@ -14,8 +14,10 @@
               <th>Açıklama</th>
             </thead>
             <tbody>
-              <tr v-for="product in getProductList" :key="product.Name">
-                <td class="align-middle text-center"><span class="badge badge-info"> {{product.Id}} </span></td>
+              <tr v-for="product in getProductList" :key="product.Id">
+                <td class="align-middle text-center">
+                  <span class="badge badge-info"> {{ product.Id }} </span>
+                </td>
                 <td class="align-middle text-center">{{ product.Name }}</td>
                 <td class="align-middle text-center">{{ product.Amount }}</td>
                 <td style="width: 120px;">{{ product.Price }}</td>
@@ -26,7 +28,9 @@
           <div class="alert alert-warning" v-if="getProductList.length == 0">
             <strong>Henüz Burada Bir Kayıt Bulamadık</strong>
             <br />
-            <small>Kayıt Eklemek için Ürün İşlemleri menüsünden yararlanabilirsiniz </small>
+            <small
+              >Kayıt Eklemek için <router-link to="/product-purchase">Ürün İşlemleri</router-link> menüsünden yararlanabilirsiniz
+            </small>
           </div>
         </div>
       </div>

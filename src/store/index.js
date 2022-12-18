@@ -13,26 +13,28 @@ export const store = new Vuex.Store({
     },
   },
   mutations: {
-    saveProduct(state, val) {
-      Vue.http.post('https://product-management-app-25360-default-rtdb.firebaseio.com/products.json', val).then((res) => {
-        console.log(res);
-      });
-      state.products.push(val);
-    },
     fetchDataFromFirebase(state, data) {
+      state.products = [];
       Object.keys(data).forEach((product) => {
-        state.products.push({Id: product, ...data[product] });
+        state.products.push({ Id: product, ...data[product] });
       });
     },
   },
   actions: {
-    saveProduct({ commit }, payload) {
-      commit('saveProduct', payload);
+    saveProduct(_, payload) {
+      Vue.http.post('https://product-management-app-25360-default-rtdb.firebaseio.com/products.json', payload).then((res) => {});
     },
     fetchDataFromFirebase({ commit }) {
       Vue.http.get('https://product-management-app-25360-default-rtdb.firebaseio.com/products.json').then((res) => {
         commit('fetchDataFromFirebase', res.data);
       });
+    },
+    saveChanges(_, payload) {
+      Vue.http
+        .put('https://product-management-app-25360-default-rtdb.firebaseio.com/products/' + payload.Id + '.json', payload)
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
 });

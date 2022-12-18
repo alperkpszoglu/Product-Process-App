@@ -11,11 +11,11 @@
           </div>
           <div class="form-group">
             <label>Adet</label>
-            <input type="text" v-model="product.Amount" class="form-control" placeholder="Ürün adetini giriniz.." />
+            <input type="number" v-model="product.Amount" class="form-control" placeholder="Ürün adetini giriniz.." />
           </div>
           <div class="form-group">
             <label>Fiyat</label>
-            <input type="text" v-model="product.Price" class="form-control" placeholder="Ürün fiyatı giriniz.." />
+            <input type="number" v-model="product.Price" class="form-control" placeholder="Ürün fiyatı giriniz.." />
           </div>
           <div class="form-group">
             <label>Açıklama</label>
@@ -28,7 +28,7 @@
             ></textarea>
           </div>
           <hr />
-          <button class="btn btn-primary" @click="saveProduct">Kaydet</button>
+          <button class="btn btn-primary" :disabled="!validateData" @click="saveProduct">Kaydet</button>
         </div>
       </div>
     </div>
@@ -49,7 +49,12 @@ export default {
   },
   methods: {
     saveProduct() {
-      this.$store.dispatch('saveProduct',this.product);
+      this.$store.dispatch('saveProduct', this.product);
+    },
+  },
+  computed: {
+    validateData() {
+      return this.product.Name && this.product.Amount && this.product.Price && this.product.Description;
     },
   },
 };
