@@ -20,6 +20,13 @@ export default {
     ProductExit,
     FooterComponent,
   },
+  created() {
+    this.$store.dispatch('fetchDataFromFirebase');
+
+    // it updates trade-result on footer
+    this.$store.dispatch('getTradeResult');
+    console.log(this.$store.state.purchase);
+  },
 };
 </script>
 

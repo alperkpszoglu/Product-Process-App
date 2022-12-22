@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       state: {},
-      amount: 0,
+      subtrackValue: 0,
     };
   },
   computed: {
@@ -51,17 +51,14 @@ export default {
       return this.$store.getters.productList;
     },
     validateData() {
-      return this.amount && Object.keys(this.state).length === 0;
+      return this.subtrackValue && Object.keys(this.state).length === 0;
     },
   },
   methods: {
     saveChanges() {
-      this.state.Amount -= this.amount;
+      this.state.Amount -= this.subtrackValue;
       this.$store.dispatch('saveChanges', this.state);
     },
-  },
-  created() {
-    this.$store.dispatch('fetchDataFromFirebase');
   },
 };
 </script>

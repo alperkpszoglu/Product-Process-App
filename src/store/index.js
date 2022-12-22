@@ -30,13 +30,21 @@ export const store = new Vuex.Store({
       });
     },
     updateTradeResult(state, payload) {
-      state.purchase += parseFloat(payload.Price) * parseInt(payload.Amount);
+      state.purchase += parseFloat(payload.purchase) * parseInt(payload.amount);
+      state.sales += parseFloat(payload.sales) * parseInt(payload.amount);
+      state.balance = parseFloat(state.sales) - parseFloat(state.purchase);
     },
   },
   actions: {
     saveProduct(_, payload) {
       Vue.http.post('https://product-management-app-25360-default-rtdb.firebaseio.com/products.json', payload).then((res) => {});
-      this.dispatch('setTradeResult', payload);
+      let data = {
+        // we use this bc of use one data for sales and purchase
+        purchase: payload.Price,
+        sales: 0,
+        amount: payload.Amount,
+      };
+      this.dispatch('setTradeResult', data);
     },
     fetchDataFromFirebase({ commit }) {
       Vue.http.get('https://product-management-app-25360-default-rtdb.firebaseio.com/products.json').then((res) => {
@@ -47,17 +55,32 @@ export const store = new Vuex.Store({
       Vue.http
         .put('https://product-management-app-25360-default-rtdb.firebaseio.com/products/' + payload.Id + '.json', payload)
         .then((res) => {
-          console.log(res);
+          let data = {
+            purchase: 0,
+            sales: payload.Price,
+            amount: payload.Amount,
+          };
+          this.dispatch('setTradeResult', data);
         });
     },
     setTradeResult({ state, commit }, payload) {
       commit('updateTradeResult', payload);
-      Vue.http.put('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json', state.purchase).then((res) => {});
+      Vue.http
+        .put('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json', store.getters.tradeResult)
+        .then((res) => {});
     },
-    getTradeResult({state}) {
-      Vue.http.get('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json').then((res) => {
-        state.purchase = res.body;
-      });
+    getTradeResult({ state }) {
+      try {
+        Vue.http.get('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json').then((res) => {
+          state.purchase = res.body.purchase;
+          state.sales = res.body.sales;
+          state.balance = res.body.balance;
+        });
+      } catch (err) {
+        Vue.http
+          .post('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json', store.getters.tradeResult)
+          .then((res) => {});
+      }
     },
   },
 });
