@@ -28,7 +28,7 @@
           </div>
           <div class="form-group">
             <label>Adet</label>
-            <input type="text" class="form-control" v-model="amount" placeholder="Ürün adetini giriniz.." />
+            <input type="text" class="form-control" v-model="subtrackValue" placeholder="Ürün adetini giriniz.." />
           </div>
           <hr />
           <button class="btn btn-primary" :disabled="validateData" @click="saveChanges">Kaydet</button>
@@ -57,7 +57,7 @@ export default {
   methods: {
     saveChanges() {
       this.state.Amount -= this.subtrackValue;
-      this.$store.dispatch('saveChanges', this.state);
+      this.$store.dispatch('saveChanges', { state: this.state, subtrackValue: this.subtrackValue });
     },
   },
 };

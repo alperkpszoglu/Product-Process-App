@@ -44,6 +44,10 @@ export default {
     getProductList() {
       return this.$store.getters.productList;
     },
+    created(){
+    this.$store.dispatch('fetchDataFromFirebase');
+
+    }
   },
 };
 </script>

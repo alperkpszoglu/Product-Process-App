@@ -53,12 +53,12 @@ export const store = new Vuex.Store({
     },
     saveChanges(_, payload) {
       Vue.http
-        .put('https://product-management-app-25360-default-rtdb.firebaseio.com/products/' + payload.Id + '.json', payload)
+        .put('https://product-management-app-25360-default-rtdb.firebaseio.com/products/' + payload.state.Id + '.json', payload.state)
         .then((res) => {
           let data = {
             purchase: 0,
-            sales: payload.Price,
-            amount: payload.Amount,
+            sales: payload.state.Price,
+            amount: payload.subtrackValue,
           };
           this.dispatch('setTradeResult', data);
         });

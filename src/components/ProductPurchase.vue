@@ -57,6 +57,9 @@ export default {
       return this.product.Name && this.product.Amount && this.product.Price && this.product.Description;
     },
   },
+  created() {
+    this.$store.dispatch('fetchDataFromFirebase');
+  },
 };
 </script>
 
