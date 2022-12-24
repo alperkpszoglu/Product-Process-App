@@ -6,4 +6,5 @@ export const routes = [
   { path: '/', component: ProductList, name: 'productList' },
   { path: '/product-purchase', component: ProductPurchase, name: 'productPurchase' },
   { path: '/product-exit', component: ProductExit, name: 'productExit' },
+  { path: '*', redirect: '/' },
 ];

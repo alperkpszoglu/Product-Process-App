@@ -17,7 +17,7 @@
                 <div class="col-12 text-center">
                   <div class="mb-3">
                     <span class="badge badge-info">Stok : {{ state.Amount }}</span>
-                    <span class="badge badge-primary">Fiyat : {{ state.Price }} TL</span>
+                    <span class="badge badge-primary">Fiyat : {{ state.Price | toCurrency }}</span>
                   </div>
                   <p class="border border-warning p-2 text-secondary">
                     {{ state.Description }}

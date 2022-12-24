@@ -19,8 +19,13 @@
                   <span class="badge badge-info"> {{ product.Id }} </span>
                 </td>
                 <td class="align-middle text-center">{{ product.Name }}</td>
-                <td class="align-middle text-center">{{ product.Amount }}</td>
-                <td style="width: 120px;">{{ product.Price }}</td>
+                <td
+                  class="align-middle text-center"
+                  :style="product.Amount <= 0 ? { backgroundColor: 'red' } : { backgroundColor: 'green' }"
+                >
+                  {{ product.Amount }}
+                </td>
+                <td style="width: 120px;">{{ product.Price | toCurrency }}</td>
                 <td class="align-middle">{{ product.Description }}</td>
               </tr>
             </tbody>
@@ -44,10 +49,9 @@ export default {
     getProductList() {
       return this.$store.getters.productList;
     },
-    created(){
+  },
+  created() {
     this.$store.dispatch('fetchDataFromFirebase');
-
-    }
   },
 };
 </script>
