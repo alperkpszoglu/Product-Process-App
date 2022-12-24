@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { router } from '../router';
 
 Vue.use(Vuex);
 
@@ -45,6 +46,7 @@ export const store = new Vuex.Store({
         amount: payload.Amount,
       };
       this.dispatch('setTradeResult', data);
+      router.replace('/');
     },
     fetchDataFromFirebase({ commit }) {
       Vue.http.get('https://product-management-app-25360-default-rtdb.firebaseio.com/products.json').then((res) => {
@@ -62,12 +64,11 @@ export const store = new Vuex.Store({
           };
           this.dispatch('setTradeResult', data);
         });
+      router.replace('/');
     },
-    setTradeResult({ state, commit }, payload) {
+    setTradeResult({ commit }, payload) {
       commit('updateTradeResult', payload);
-      Vue.http
-        .put('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json', store.getters.tradeResult)
-        .then((res) => {});
+      Vue.http.put('https://product-management-app-25360-default-rtdb.firebaseio.com/trade-result.json', store.getters.tradeResult);
     },
     getTradeResult({ state }) {
       try {

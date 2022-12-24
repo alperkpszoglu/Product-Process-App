@@ -1,7 +1,9 @@
 <template>
   <div>
     <navbar-component />
+    <transition name="fade" mode="out-in">
     <router-view></router-view>
+    </transition>
     <footer-component />
   </div>
 </template>
@@ -28,4 +30,22 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body{
+background-color: #93a1be5c;
+}
+
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter:active{
+  transition: opacity .3s ease-out;
+}
+.fade-leave{
+  opacity: 1;
+}
+.fade-leave-active{
+  transition: opacity .3s ease-out ;
+  opacity: 0;
+}
+</style>

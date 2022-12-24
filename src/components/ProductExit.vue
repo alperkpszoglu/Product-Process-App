@@ -35,6 +35,12 @@
         </div>
       </div>
     </div>
+    <div class="loading" v-if="isSaveButtonClicked">
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,6 +50,7 @@ export default {
     return {
       state: {},
       subtrackValue: 0,
+      isSaveButtonClicked: false,
     };
   },
   computed: {
@@ -56,8 +63,11 @@ export default {
   },
   methods: {
     saveChanges() {
+      this.isSaveButtonClicked = true;
       this.state.Amount -= this.subtrackValue;
-      this.$store.dispatch('saveChanges', { state: this.state, subtrackValue: this.subtrackValue });
+      setTimeout(() => {
+        this.$store.dispatch('saveChanges', { state: this.state, subtrackValue: this.subtrackValue });
+      }, 0);
     },
   },
 };

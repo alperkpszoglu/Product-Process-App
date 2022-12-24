@@ -32,6 +32,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -45,11 +46,15 @@ export default {
         Price: 0,
         Description: '',
       },
+      isSaveButtonClicked: false,
     };
   },
   methods: {
     saveProduct() {
-      this.$store.dispatch('saveProduct', this.product);
+      this.isSaveButtonClicked = true;
+      setTimeout(() => {
+        this.$store.dispatch('saveProduct', this.product);
+      }, 0);
     },
   },
   computed: {
