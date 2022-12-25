@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar fixed-bottom  navbar-light" style="background-color: #e3f2fd;">
+  <nav class="navbar fixed-bottom  navbar-light" style="background-color: #e3f2fd; margin-top: 5rem">
     <span class="navbar-text mr-auto"> <strong>ProdSimple.com</strong> | alperkapusizoglu </span>
     <span class="navbar-text navbar-nav my-2 my-lg-0 mr-3">
       <strong>Alış Tutarı : </strong>

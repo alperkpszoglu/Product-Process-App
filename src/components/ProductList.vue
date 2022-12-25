@@ -5,31 +5,25 @@
         <div class="card-body">
           <h3>Ürün Listesi</h3>
           <hr />
-          <table class="table table-hover table-striped table-bordered">
-            <thead>
-              <th>id</th>
-              <th>Ürün Adı</th>
-              <th>Adet</th>
-              <th>Fiyat</th>
-              <th>Açıklama</th>
-            </thead>
-            <tbody>
-              <tr v-for="product in getProductList" :key="product.Id">
-                <td class="align-middle text-center">
-                  <span class="badge badge-info"> {{ product.Id }} </span>
-                </td>
-                <td class="align-middle text-center">{{ product.Name }}</td>
-                <td
-                  class="align-middle text-center"
-                  :style="product.Amount <= 0 ? { backgroundColor: 'red' } : { backgroundColor: 'green' }"
-                >
-                  {{ product.Amount }}
-                </td>
-                <td style="width: 120px;">{{ product.Price | toCurrency }}</td>
-                <td class="align-middle">{{ product.Description }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="row ">
+            <div class="product-card col-3" v-for="product in getProductList" :key="product.Id">
+              <div class="product-badge">Hot</div>
+              <div class="product-tumb">
+                <img :src="product.Image" class="img-fluid " />
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">{{ product.Id }}</span>
+                <h4>
+                 {{ product.Name }}
+                </h4>
+                <p>{{ product.Description }}</p>
+                <p class="font-weight-bold" :style="product.Amount < 10 && {color: 'red'}">Ürün Adeti: {{product.Amount}}</p>
+                <div class="product-bottom-details">
+                  <div class="product-price"><small>$96.00</small>{{ product.Price | toCurrency }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="alert alert-warning" v-if="getProductList.length == 0">
             <strong>Henüz Burada Bir Kayıt Bulamadık</strong>
             <br />
@@ -56,4 +50,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@import url('/src/assets/product.css');
+.card {
+  margin-bottom: 7rem !important;
+}
+</style>

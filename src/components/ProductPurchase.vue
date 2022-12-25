@@ -3,8 +3,12 @@
     <div class="row">
       <div class="col-6 offset-3 pt-3 card mt-5 shadow">
         <div class="card-body">
-          <h3>Ürün İşlemleri</h3>
+          <h3>Ürün Ekleme İşlemleri</h3>
           <hr />
+          <div class="input-group custom-file-button mb-3 mt-4">
+            <label class="input-group-text" for="inputGroupFile">Resim Seçiniz</label>
+            <input type="file" @input="updateImage" class="form-control" id="inputGroupFile" />
+          </div>
           <div class="form-group">
             <label>Ürün Adı</label>
             <input type="text" v-model="product.Name" class="form-control" placeholder="Ürün adını giriniz.." />
@@ -32,7 +36,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -41,10 +44,11 @@ export default {
   data() {
     return {
       product: {
-        Name: '',
+        Image: null,
+        Name: null,
         Amount: 0,
         Price: 0,
-        Description: '',
+        Description: null,
       },
       isSaveButtonClicked: false,
     };
@@ -54,7 +58,15 @@ export default {
       this.isSaveButtonClicked = true;
       setTimeout(() => {
         this.$store.dispatch('saveProduct', this.product);
-      }, 0);
+      }, 500);
+    },
+    updateImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.product.Image = reader.result;
+      };
+      reader.readAsDataURL(file);
     },
   },
   computed: {
@@ -68,4 +80,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.custom-file-button input[type='file'] {
+  margin-left: -2px !important;
+}
+.custom-file-button input[type='file']::-webkit-file-upload-button {
+  display: none;
+}
+.custom-file-button input[type='file']::file-selector-button {
+  display: none;
+}
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>

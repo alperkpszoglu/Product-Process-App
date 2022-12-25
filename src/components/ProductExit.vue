@@ -11,21 +11,25 @@
               <option v-for="product in getProductList" :key="product.Id" :value="product">{{ product.Name }}</option>
             </select>
           </div>
-          <div class="card mb-2 border border-danger" v-if="Object.keys(state).length !== 0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12 text-center">
-                  <div class="mb-3">
-                    <span class="badge badge-info">Stok : {{ state.Amount }}</span>
-                    <span class="badge badge-primary">Fiyat : {{ state.Price | toCurrency }}</span>
-                  </div>
-                  <p class="border border-warning p-2 text-secondary">
-                    {{ state.Description }}
-                  </p>
+          <div class="row" v-if="Object.keys(state).length !== 0">
+            <div class="product-card col-8">
+              <div class="product-tumb">
+                <img :src="state.Image" class="img-fluid" />
+              </div>
+              <div class="product-details">
+                <span class="product-catagory">{{ state.Id }}</span>
+                <h4>
+                  {{ state.Name }}
+                </h4>
+                <p>{{ state.Description }}</p>
+                <p class="font-weight-bold">Ürün Adeti: {{state.Amount}}</p>
+                <div class="product-bottom-details">
+                  <div class="product-price"><small>$96.00</small>{{ state.Price | toCurrency }}</div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="form-group">
             <label>Adet</label>
             <input type="text" class="form-control" v-model="subtrackValue" placeholder="Ürün adetini giriniz.." />
@@ -67,10 +71,18 @@ export default {
       this.state.Amount -= this.subtrackValue;
       setTimeout(() => {
         this.$store.dispatch('saveChanges', { state: this.state, subtrackValue: this.subtrackValue });
-      }, 0);
+      }, 500);
     },
   },
+  created(){
+     this.$store.dispatch('fetchDataFromFirebase');
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+@import url('/src/assets/product.css');
+.card {
+  margin-bottom: 7rem !important;
+}
+</style>
